@@ -12,7 +12,6 @@ func BenchmarkInt64HashSetInsert(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		intHashSet.Insert(rand.Int63())
 	}
-	//fmt.Println(Int64HashSet.List())
 }
 
 func BenchmarkHashSetInsert(b *testing.B) {
@@ -21,7 +20,6 @@ func BenchmarkHashSetInsert(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		hashSet.Insert(rand.Int63())
 	}
-	//fmt.Println(hashSet.List())
 }
 
 func BenchmarkLinkHashSetInsert(b *testing.B) {
@@ -30,7 +28,6 @@ func BenchmarkLinkHashSetInsert(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		linkHashSet.Insert(rand.Int63())
 	}
-	//fmt.Println(LinkHashSet.List())
 }
 
 func BenchmarkInt64HashSetList(b *testing.B) {
@@ -39,7 +36,7 @@ func BenchmarkInt64HashSetList(b *testing.B) {
 	for i := 0; i < 1024*1024; i++ {
 		intHashSet.Insert(rand.Int63())
 	}
-	//b.ResetTimer()
+	b.ResetTimer()
 	_ = intHashSet.List()
 }
 
@@ -47,9 +44,9 @@ func BenchmarkHashSetList(b *testing.B) {
 	rand.Seed(time.Now().UnixNano())
 	hashSet := NewHashSet(0)
 	for i := 0; i < 1024*1024; i++ {
-		hashSet.Insert(rand.Int())
+		hashSet.Insert(rand.Int63())
 	}
-	//b.ResetTimer()
+	b.ResetTimer()
 	_ = hashSet.ListInt()
 }
 
@@ -57,9 +54,9 @@ func BenchmarkLinkHashSetList(b *testing.B) {
 	rand.Seed(time.Now().UnixNano())
 	linkHashSet := NewLinkHashSet(0)
 	for i := 0; i < 1024*1024; i++ {
-		linkHashSet.Insert(rand.Int())
+		linkHashSet.Insert(rand.Int63())
 	}
-	//b.ResetTimer()
+	b.ResetTimer()
 	_ = linkHashSet.ListInt()
 }
 

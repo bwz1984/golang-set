@@ -41,7 +41,6 @@ func (set *LinkHashSet) Insert(items ...interface{}) {
 			newItem := &itemStruct{val: item, next: nil}
 			if set.cnt == 0 {
 				set.header.next = newItem
-				set.tailer = set.header
 			}
 			set.tailer.next = newItem
 			set.tailer = newItem
