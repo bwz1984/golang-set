@@ -48,3 +48,11 @@ BenchmarkLinkHashSetDelete-8            1000000000               0.0009641 ns/op
 PASS
 ok      set/set 0.285s
 ```
+
+Overall, int64hashset performs best.
+HashSet and LinkHashSet use reflection, the performance is reduced.
+In addition to using Map, LinkHashSet also uses one-way linked list to ensure the order of insertion.
+
+
+
+
