@@ -103,3 +103,15 @@ func (set *GenericLinkHashSet[T]) String() string {
 	}
 	return "[" + strings.Join(items, ",") + "]"
 }
+
+func (set *GenericLinkHashSet[T]) Diff(set2 *GenericLinkHashSet[T]) *GenericLinkHashSet[T] {
+	res := NewGenericLinkHashSet[T]()
+	cur := set.header.next
+	for cur != nil {
+		if !set2.Has(cur.val) {
+			res.Insert(cur.val)
+		}
+		cur = cur.next
+	}
+	return res
+}

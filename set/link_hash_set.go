@@ -84,16 +84,6 @@ func (set *LinkHashSet) Size() int {
 	return set.cnt
 }
 
-func (set *LinkHashSet) List() []interface{} {
-	list := make([]interface{}, 0, set.cnt)
-	cur := set.header.next
-	for cur != nil {
-		list = append(list, cur.val)
-		cur = cur.next
-	}
-	return list
-}
-
 func (set *LinkHashSet) String() string {
 	items := []string{}
 	cur := set.header.next
@@ -102,6 +92,28 @@ func (set *LinkHashSet) String() string {
 		cur = cur.next
 	}
 	return "[" + strings.Join(items, ",") + "]"
+}
+
+func (set *LinkHashSet) Diff(set2 *LinkHashSet) *LinkHashSet {
+	res := NewLinkHashSet()
+	cur := set.header.next
+	for cur != nil {
+		if !set2.Has(cur.val) {
+			res.Insert(cur.val)
+		}
+		cur = cur.next
+	}
+	return res
+}
+
+func (set *LinkHashSet) List() []interface{} {
+	list := make([]interface{}, 0, set.cnt)
+	cur := set.header.next
+	for cur != nil {
+		list = append(list, cur.val)
+		cur = cur.next
+	}
+	return list
 }
 
 func (set *LinkHashSet) ListByte() []byte {

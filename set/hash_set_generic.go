@@ -61,3 +61,13 @@ func (set *GenericHashSet[T]) List() []T {
 	}
 	return list
 }
+
+func (set *GenericHashSet[T]) Diff(set2 *GenericHashSet[T]) *GenericHashSet[T] {
+	res := NewGenericHashSet[T]()
+	for item := range *set {
+		if !set2.Has(item) {
+			res.Insert(item)
+		}
+	}
+	return res
+}

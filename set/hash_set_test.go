@@ -1,6 +1,9 @@
 package set
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestHashSetString(t *testing.T) {
 	hashSet := NewHashSet(8)
@@ -67,5 +70,19 @@ func TestHashSetInt64(t *testing.T) {
 	hashSet.Insert(int64(1111), int64(2222), int64(3333))
 	if len(hashSet.ListInt64()) != 3 {
 		t.Errorf("Expected len(ListInt64)=3, but %#v", len(hashSet.ListInt64()))
+	}
+
+}
+
+func TestDiff(t *testing.T) {
+	hashSet := NewHashSet()
+	hashSet.Insert(1111, 2222, 3333)
+	hashSet2 := NewHashSet()
+	hashSet2.Insert(1111)
+	diffSet := hashSet.Diff(hashSet2)
+	diffSetE := NewHashSet()
+	diffSetE.Insert(2222, 3333)
+	if !reflect.DeepEqual(diffSet, diffSetE) {
+		t.Errorf("Expected %#v, but %#v", diffSet, diffSetE)
 	}
 }

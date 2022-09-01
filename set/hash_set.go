@@ -54,6 +54,16 @@ func (set HashSet) String() string {
 	return "[" + strings.Join(items, ",") + "]"
 }
 
+func (set HashSet) Diff(set2 HashSet) HashSet {
+	res := NewHashSet()
+	for item := range set {
+		if !set2.Has(item) {
+			res.Insert(item)
+		}
+	}
+	return res
+}
+
 func (set HashSet) List() []interface{} {
 	list := make([]interface{}, 0, len(set))
 	for item := range set {
